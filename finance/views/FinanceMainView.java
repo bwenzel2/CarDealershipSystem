@@ -39,8 +39,6 @@ public class FinanceMainView extends javax.swing.JFrame implements View
         for (FinanceCarModel car : financed_cars) {
             response.append(counter++ + "\t\t" + car.toString() + "\n");
         }
-        initComponents();
-        this.setVisible(true);
         return response.toString();
     }
 
@@ -57,10 +55,13 @@ public class FinanceMainView extends javax.swing.JFrame implements View
     private void detailed_viewActionPerformed(ActionEvent e) {
         this.financed_cars = viewModel.loadFinancedCars();
         String enterd_vin = vin.getText();
+
         System.out.println(financed_cars.toString());
         boolean found = false;
+        System.out.println(this.financed_cars.size());
         for(FinanceCarModel current_car: this.financed_cars)
         {
+            System.out.println(current_car.toString());
             CarModel temp_car = current_car.getCar();
             System.out.println(temp_car.getVIN());
             System.out.println(enterd_vin);

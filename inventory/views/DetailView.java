@@ -32,13 +32,11 @@ public class DetailView extends javax.swing.JFrame implements View {
 	}
 
     private void okButtonActionPerformed(ActionEvent e) {
-        View new_view = new InventoryMainView(this.mainview, this.mainview.getInventoryItems());
-        this.mainview.switchView(new_view);
+        this.dispose();
     }
 
     private void button_backActionPerformed(ActionEvent e) {
-	    View new_view = new InventoryMainView(mainview, carModels);
-	    this.mainview.switchView(new_view);
+	    this.dispose();
     }
 
     private void initComponents() {

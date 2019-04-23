@@ -71,8 +71,6 @@ public class AddFinanceView extends JFrame implements View {
     }
 
     private void backButtonActionPerformed(ActionEvent e) {
-        View new_view = new FinanceMainView(this.financedViewModel);
-        this.financedViewModel.switchView(new_view);
         this.dispose();
     }
 

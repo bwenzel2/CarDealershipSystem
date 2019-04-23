@@ -49,8 +49,7 @@ public class FinanceDetailView extends javax.swing.JFrame implements View {
 
 
     private void okButtonActionPerformed(ActionEvent e) {
-        View new_view = new FinanceMainView(this.view);
-        this.view.switchView(new_view);
+        this.dispose();
     }
 
     private void initComponents() {

@@ -44,6 +44,7 @@ public class FinanceViewModel
             FinanceCarModel new_car = new FinanceCarModel(car,price,amount_paid);
             FileWriter writer = new FileWriter(data_location,true);
             BufferedWriter bwr = new BufferedWriter(writer);
+            bwr.write("\n");
             bwr.write(car.getVIN());
             bwr.write(",");
             bwr.write(car.getMake());
@@ -55,7 +56,6 @@ public class FinanceViewModel
             bwr.write(String.valueOf(price));
             bwr.write(",");
             bwr.write(String.valueOf(amount_paid));
-            bwr.write("\n");
             bwr.close();
             writer.close();
             this.financed_cars.add(new_car);
@@ -93,7 +93,6 @@ public class FinanceViewModel
                 else{
                     CarModel temp_car = new CarModel(values[0],values[1],values[2],values[3]);
                     FinanceCarModel temp_finance = new FinanceCarModel(temp_car,Integer.parseInt(values[4]),Integer.parseInt(values[5]));
-                    System.out.println(temp_finance.toString());
                     cars.add(temp_finance);
                 }
             }
