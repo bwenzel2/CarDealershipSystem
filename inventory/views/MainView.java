@@ -53,8 +53,12 @@ public class MainView extends javax.swing.JFrame implements View {
 	}
 
 	private void inventoryViewButtonActionPerformed(java.awt.event.ActionEvent evt) {
-		View new_view = new InventoryMainView(renderItems, presenter);
-		this.presenter.switchView(new_view);
+		try {
+			View new_view = new InventoryMainView(renderItems, presenter);
+			this.presenter.switchView(new_view);
+		} catch (NullPointerException ex) {
+			System.out.println(ex.getMessage());
+		}
 	}
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables

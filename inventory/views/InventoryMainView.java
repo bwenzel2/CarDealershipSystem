@@ -3,6 +3,7 @@ package inventory.views;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.Set;
 import java.lang.StringBuilder;
 import inventory.models.InventoryCarModel;
@@ -23,8 +24,8 @@ public class InventoryMainView extends javax.swing.JFrame implements View {
     private Set<InventoryCarRenderable> renderItems;
     private InventoryPresenter presenter;
     private MainView mainView;
+    String foundVIN;
     private Set<InventoryCarModel> inventoryItems;
-    String findVin;
     public InventoryMainView(Set<InventoryCarModel> items, InventoryPresenter presenter) {
         inventoryItems = items;
         this.presenter = presenter;
@@ -49,9 +50,10 @@ public class InventoryMainView extends javax.swing.JFrame implements View {
     }
 
     private void detailedViewButtonActionPerformed(ActionEvent e) {
+
         for (InventoryCarModel s: inventoryItems) {
-            if(s.getVIN().equals(findVin)) {
-                View new_view = new DetailView(presenter, s);
+            if(s.getVIN().equals(foundVIN)) {
+                View new_view = new DetailView(presenter, inventoryItems, foundVIN);
                 this.presenter.switchView(new_view);
             }
 
@@ -70,7 +72,8 @@ public class InventoryMainView extends javax.swing.JFrame implements View {
         // Generated using JFormDesigner Evaluation license - Hammad Hanif
         label1 = new JLabel();
         scrollPane1 = new JScrollPane();
-        list1 = new JList();
+        DefaultListModel<String> model = new DefaultListModel<>();
+        list1 = new JList<>(model);
         button1 = new JButton();
         button2 = new JButton();
 
@@ -104,6 +107,25 @@ public class InventoryMainView extends javax.swing.JFrame implements View {
                 backButtonActionPerformed(evt);
             }
         });
+        int count = 0;
+        for (InventoryCarModel i : inventoryItems) {
+            model.addElement(i.getVIN());
+        }
+
+        MouseListener m = new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                JList list = (JList) e.getSource();
+                if (e.getClickCount() >= 1) {
+                    int index = list.locationToIndex(e.getPoint());
+                    if(index >= 0) {
+                        foundVIN = list.getModel().getElementAt(index).toString();
+                    }
+                }
+            }
+        };
+        list1.addMouseListener(m);
+
         contentPane.add(button2, BorderLayout.EAST);
         pack();
         setLocationRelativeTo(getOwner());
