@@ -25,17 +25,10 @@ public class InventoryMainView extends javax.swing.JFrame implements View {
     private MainView mainView;
     private Set<InventoryCarModel> inventoryItems;
     String findVin;
-    public InventoryMainView(Set<InventoryCarRenderable> items, InventoryPresenter presenter, MainView mainView) {
-        this.renderItems = items;
+    public InventoryMainView(Set<InventoryCarModel> items, InventoryPresenter presenter) {
+        inventoryItems = items;
         this.presenter = presenter;
-        this.mainView = mainView;
     }
-
-    public InventoryMainView(InventoryPresenter mainview, Set<InventoryCarModel> inventoryItems) {
-        presenter = mainview;
-        this.inventoryItems = inventoryItems;
-    }
-
 
     public String render() {
         initComponents();
@@ -52,10 +45,11 @@ public class InventoryMainView extends javax.swing.JFrame implements View {
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {
         View new_view = new MainView(inventoryItems, presenter);
         this.presenter.switchView(new_view);
+        this.setVisible(false);
     }
 
     private void detailedViewButtonActionPerformed(ActionEvent e) {
-        for (InventoryCarRenderable s: renderItems) {
+        for (InventoryCarModel s: inventoryItems) {
             if(s.getVIN().equals(findVin)) {
                 View new_view = new DetailView(presenter, s);
                 this.presenter.switchView(new_view);
@@ -80,18 +74,6 @@ public class InventoryMainView extends javax.swing.JFrame implements View {
         button1 = new JButton();
         button2 = new JButton();
 
-        list1.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                JList list = (JList) e.getSource();
-                if (e.getClickCount() == 1) {
-                    int index = list.locationToIndex(e.getPoint());
-                    if (index >= 0) {
-                        findVin = list.getModel().getElementAt(index).toString();
-                    }
-                }
-            }
-        });
         //======== this ========
         Container contentPane = getContentPane();
         contentPane.setLayout(new BorderLayout());
@@ -117,6 +99,11 @@ public class InventoryMainView extends javax.swing.JFrame implements View {
 
         //---- button2 ----
         button2.setText("Back");
+        button2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backButtonActionPerformed(evt);
+            }
+        });
         contentPane.add(button2, BorderLayout.EAST);
         pack();
         setLocationRelativeTo(getOwner());
