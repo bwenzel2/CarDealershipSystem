@@ -2,6 +2,8 @@ package inventory.views;
 
 import inventory.models.InventoryCarModel;
 import inventory.presenters.InventoryPresenter;
+
+import java.awt.event.ActionEvent;
 import java.util.Set;
 import java.awt.*;
 import javax.swing.*;
@@ -11,6 +13,7 @@ public class InventoryDetailView implements View {
 	InventoryPresenter presenter;
 	String passedVIN;
 	Set<InventoryCarModel> inventoryCarModelSet;
+
 	public InventoryDetailView(InventoryPresenter presenter, String passedVIN, Set<InventoryCarModel> inventoryCarModelSet) {
 		this.inventoryCarModelSet = inventoryCarModelSet;
 		this.presenter = presenter;
@@ -29,6 +32,7 @@ public class InventoryDetailView implements View {
         scrollPane1 = new JScrollPane();
         panel2 = new JPanel();
         label2 = new JLabel();
+        vint = new JLabel();
         vint = new JLabel();
         label4 = new JLabel();
         maket = new JLabel();
@@ -129,6 +133,11 @@ public class InventoryDetailView implements View {
 
                     //---- button_back ----
                     button_back.setText("Back");
+                    button_back.addActionListener(new java.awt.event.ActionListener() {
+                        public void actionPerformed(java.awt.event.ActionEvent evt) {
+                            buttonBackActionPerformed(evt);
+                        }
+                    });
                     panel2.add(button_back, new GridBagConstraints(0, 6, 1, 1, 0.0, 0.0,
                         GridBagConstraints.CENTER, GridBagConstraints.BOTH,
                         new Insets(0, 0, 0, 5), 0, 0));
@@ -138,6 +147,11 @@ public class InventoryDetailView implements View {
             panel1.add(scrollPane1, BorderLayout.CENTER);
         }
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
+    }
+
+    private void buttonBackActionPerformed(ActionEvent e) {
+        View new_view = new MainView(inventoryCarModelSet, presenter);
+        this.presenter.switchView(new_view);
     }
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
