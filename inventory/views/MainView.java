@@ -22,7 +22,7 @@ public class MainView extends javax.swing.JFrame implements View {
 	private InventoryPresenter presenter;
 
 	public MainView(Set<InventoryCarModel> items, InventoryPresenter presenter) {
-		this.renderItems = items;
+		renderItems = items;
 		this.presenter = presenter;
 		initComponents();
 	}
@@ -41,87 +41,6 @@ public class MainView extends javax.swing.JFrame implements View {
 	}
 
 
-	@SuppressWarnings("unchecked")
-	private void initComponents() {
-
-		newItemButton = new javax.swing.JButton();
-		jScrollPane1 = new javax.swing.JScrollPane();
-		inventoryList = new javax.swing.JList<>();
-		backButton = new javax.swing.JButton();
-		inventoryLabel = new javax.swing.JLabel();
-
-		this.setDefaultCloseOperation(javax.swing.WindowConstants.HIDE_ON_CLOSE);
-
-		newItemButton.setText("New Item");
-		newItemButton.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				newItemButtonActionPerformed(evt);
-			}
-		});
-
-		ArrayList<String> strings = new ArrayList<String>();
-		for (InventoryCarModel temp : renderItems) {
-			System.out.println(temp.toString());
-			strings.add(temp.getVIN());
-		}
-		inventoryList.setModel(new javax.swing.AbstractListModel<String>() {
-
-
-			public int getSize() { return strings.size(); }
-			public String getElementAt(int i) { return strings.get(i); }
-		});
-		inventoryList.addListSelectionListener(new ListSelectionListener() {
-			@Override
-			public void valueChanged(ListSelectionEvent e) {
-				if (!e.getValueIsAdjusting()) {
-					System.out.println(e.getFirstIndex() + " " + e.getLastIndex());
-				}
-			}
-		});
-		jScrollPane1.setViewportView(inventoryList);
-
-		backButton.setText("<< Back");
-		backButton.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				backButtonActionPerformed(evt);
-			}
-		});
-
-
-
-		inventoryLabel.setText("Inventory");
-
-		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-		getContentPane().setLayout(layout);
-		layout.setHorizontalGroup(
-				layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-						.addGroup(layout.createSequentialGroup()
-								.addContainerGap()
-								.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-										.addComponent(backButton)
-										.addGroup(layout.createSequentialGroup()
-												.addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
-												.addGap(18, 18, 18)
-												.addComponent(newItemButton))
-										.addComponent(inventoryLabel))
-								.addContainerGap(30, Short.MAX_VALUE))
-		);
-		layout.setVerticalGroup(
-				layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-						.addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-								.addContainerGap()
-								.addComponent(backButton)
-								.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
-								.addComponent(inventoryLabel)
-								.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-								.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-										.addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
-										.addComponent(newItemButton))
-								.addContainerGap())
-		);
-
-		pack();
-	}// </editor-fold>                        
 
 	private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {
 		this.setVisible(false);
@@ -133,19 +52,63 @@ public class MainView extends javax.swing.JFrame implements View {
 		this.presenter.switchView(new_view);
 	}
 
-	private javax.swing.JButton backButton;
-	private javax.swing.JLabel inventoryLabel;
-	private javax.swing.JList<String> inventoryList;
-	private javax.swing.JScrollPane jScrollPane1;
-	private javax.swing.JButton newItemButton;
+	private void inventoryViewButtonActionPerformed(java.awt.event.ActionEvent evt) {
+		View new_view = new InventoryMainView(presenter, renderItems);
+		this.presenter.switchView(new_view);
+	}
 
+    // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
+    // Generated using JFormDesigner Evaluation license - Hammad Hanif
+    private JLabel label1;
+    private JButton addNew;
+    private JButton inventoryView;
+    private JButton button_back;
+    // JFormDesigner - End of variables declaration  //GEN-END:variables
 
+    private void initComponents() {
+        // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
+        // Generated using JFormDesigner Evaluation license - Hammad Hanif
+        label1 = new JLabel();
+        addNew = new JButton();
+        inventoryView = new JButton();
+        button_back = new JButton();
 
-	// JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
-	// Generated using JFormDesigner Evaluation license - Hammad Hanif
-	private JLabel label1;
-	private JButton addNew;
-	private JButton button_back;
-	private JButton detailedView;
-	// JFormDesigner - End of variables declaration  //GEN-END:variables
+        //======== this ========
+        Container contentPane = getContentPane();
+        contentPane.setLayout(new BorderLayout());
+
+        //---- label1 ----
+        label1.setText("Main View");
+        contentPane.add(label1, BorderLayout.NORTH);
+
+        //---- addNew ----
+        addNew.setText("Add a New Car");
+		addNew.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				newItemButtonActionPerformed(evt);
+			}
+		});
+        contentPane.add(addNew, BorderLayout.WEST);
+
+        //---- inventoryView ----
+        inventoryView.setText("View Inventory");
+		inventoryView.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				inventoryViewButtonActionPerformed(evt);
+			}
+		});
+		contentPane.add(inventoryView, BorderLayout.EAST);
+
+        //---- button_back ----
+        button_back.setText("Back");
+        button_back.addActionListener(new java.awt.event.ActionListener() {
+        	public void actionPerformed(java.awt.event.ActionEvent evt) {
+        		backButtonActionPerformed(evt);
+			}
+		});
+        contentPane.add(button_back, BorderLayout.SOUTH);
+        pack();
+        setLocationRelativeTo(getOwner());
+        // JFormDesigner - End of component initialization  //GEN-END:initComponents
+    }
 }

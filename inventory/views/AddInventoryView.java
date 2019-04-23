@@ -154,12 +154,22 @@ public class AddInventoryView extends JFrame implements View {
 
             //---- button_addNew ----
             button_addNew.setText("Add");
+            button_addNew.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    button_addNewActionPerformed(evt);
+                }
+            });
             panel1.add(button_addNew, new GridBagConstraints(0, 6, 1, 1, 0.0, 0.0,
                     GridBagConstraints.CENTER, GridBagConstraints.BOTH,
                     new Insets(0, 0, 0, 5), 0, 0));
 
             //---- button_back ----
             button_back.setText("Back");
+            button_back.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    button_backActionPerformed(evt);
+                }
+            });
             panel1.add(button_back, new GridBagConstraints(1, 6, 1, 1, 0.0, 0.0,
                     GridBagConstraints.CENTER, GridBagConstraints.BOTH,
                     new Insets(0, 0, 0, 0), 0, 0));
