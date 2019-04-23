@@ -59,7 +59,7 @@ public class InventoryPresenter implements Publisher
 
 	//tells the currently-selected view to render
 	private void renderView() {
-		System.out.println(currentView.render());
+		System.out.println(this.currentView.render());
 	}
 
 
