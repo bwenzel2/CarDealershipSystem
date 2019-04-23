@@ -47,6 +47,7 @@ public class InventoryMainView extends javax.swing.JFrame implements View {
         View new_view = new MainView(inventoryItems, presenter);
         this.presenter.switchView(new_view);
         this.setVisible(false);
+        this.dispose();
     }
 
     private void detailedViewButtonActionPerformed(ActionEvent e) {
@@ -57,6 +58,17 @@ public class InventoryMainView extends javax.swing.JFrame implements View {
                 this.presenter.switchView(new_view);
             }
 
+        }
+    }
+
+    private void deleterActionPerformed(ActionEvent e) {
+        for (InventoryCarModel s: inventoryItems) {
+            if (s.getVIN().equals(foundVIN)) {
+                inventoryItems.remove(s);
+
+                JOptionPane.showMessageDialog(null, "Car was removed from system");
+                initComponents();
+            }
         }
     }
 
@@ -76,6 +88,7 @@ public class InventoryMainView extends javax.swing.JFrame implements View {
         list1 = new JList<>(model);
         button1 = new JButton();
         button2 = new JButton();
+        button3 = new JButton();
 
         //======== this ========
         Container contentPane = getContentPane();
@@ -105,6 +118,13 @@ public class InventoryMainView extends javax.swing.JFrame implements View {
         button2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 backButtonActionPerformed(evt);
+            }
+        });
+        contentPane.add(button3, BorderLayout.SOUTH);
+        button3.setText("Delete");
+        button3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleterActionPerformed(evt);
             }
         });
         int count = 0;
@@ -139,5 +159,6 @@ public class InventoryMainView extends javax.swing.JFrame implements View {
     private JList list1;
     private JButton button1;
     private JButton button2;
+    private JButton button3;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }

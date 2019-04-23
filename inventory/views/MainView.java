@@ -44,18 +44,22 @@ public class MainView extends javax.swing.JFrame implements View {
 
 	private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {
 		this.setVisible(false);
+		this.dispose();
 	}
 
 	private void newItemButtonActionPerformed(java.awt.event.ActionEvent evt) {
 		// TODO open the new item window here
 		View new_view = new AddInventoryView(presenter);
 		this.presenter.switchView(new_view);
+		this.dispose();
 	}
 
 	private void inventoryViewButtonActionPerformed(java.awt.event.ActionEvent evt) {
 		try {
-			View new_view = new InventoryMainView(renderItems, presenter);
+			Set<InventoryCarModel> cars = presenter.loadInventoryItems();
+			View new_view = new InventoryMainView(cars, presenter);
 			this.presenter.switchView(new_view);
+			this.dispose();
 		} catch (NullPointerException ex) {
 			System.out.println(ex.getMessage());
 		}
@@ -101,13 +105,15 @@ public class MainView extends javax.swing.JFrame implements View {
 				inventoryViewButtonActionPerformed(evt);
 			}
 		});
-		contentPane.add(inventoryView, BorderLayout.EAST);
+
+
+        contentPane.add(inventoryView, BorderLayout.EAST);
 
         //---- button_back ----
         button_back.setText("Back");
-        button_back.addActionListener(new java.awt.event.ActionListener() {
-        	public void actionPerformed(java.awt.event.ActionEvent evt) {
-        		backButtonActionPerformed(evt);
+		button_back.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				backButtonActionPerformed(evt);
 			}
 		});
         contentPane.add(button_back, BorderLayout.SOUTH);
