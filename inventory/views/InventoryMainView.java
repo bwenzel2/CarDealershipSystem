@@ -29,18 +29,16 @@ public class InventoryMainView extends javax.swing.JFrame implements View {
 		this.renderItems = items;
 		this.presenter = presenter;
 		this.mainView = mainView;
-		initComponents();
 	}
 
     public InventoryMainView(InventoryPresenter mainview, Set<InventoryCarModel> inventoryItems) {
 	    presenter = mainview;
 	    this.inventoryItems = inventoryItems;
-	    initComponents();
     }
 
 
     public String render() {
-		
+		initComponents();
 		this.setVisible(true);
 		StringBuilder response = new StringBuilder(renderItems.size() + " CARS IN CURRENT INVENTORY:\nRESULT #\t VIN\n");
 		
@@ -110,6 +108,11 @@ public class InventoryMainView extends javax.swing.JFrame implements View {
 
         //---- button1 ----
         button1.setText("Detailed View");
+				button1.addActionListener(new java.awt.event.ActionListener() {
+					public void actionPerformed(java.awt.event.ActionEvent evt) {
+						detailedViewButtonActionPerformed(evt);
+					}
+				});
         contentPane.add(button1, BorderLayout.CENTER);
 
         //---- button2 ----

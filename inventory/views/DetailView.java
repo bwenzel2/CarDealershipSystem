@@ -16,10 +16,12 @@ public class DetailView extends javax.swing.JFrame implements View {
 	public DetailView(InventoryPresenter view, InventoryCarRenderable car) {
 	    this.mainview = view;
 	    this.car = car;
-	    initComponents();
+	    
     }
 
-	public java.lang.String render() {
+	public String render()
+	{
+		initComponents();
 		this.setVisible(true);
 		StringBuilder response = new StringBuilder("Car in inventory\n");
 		response.append("Car Vin: " + car.getVIN() +  "\nCar Make " + car.getMake()+"\nCar Model "+ car.getModel()+"\nCar Color "+ car.getColor()+"\nCar Price "
