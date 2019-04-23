@@ -216,13 +216,13 @@ public class AddInventoryView extends JFrame implements View {
             model = textArea_model.getText();
             color = textArea_color.getText();
             price = Integer.parseInt(textArea_price.getText());
-            InventoryCarModel newCar = new InventoryCarModel(vin, make, model, color, price);
-            presenter.addInventoryItem(newCar.getVIN(), newCar.getMake(), newCar.getModel(), newCar.getColor(), newCar.getPrice());
-            JOptionPane.showMessageDialog(null,"A new car is successfully added in the inventory system");
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "It seems that something went wrong.");
             System.out.println("Error in adding a new vehicle to the inventory");
         }
+        InventoryCarModel newCar = new InventoryCarModel(vin, make, model, color, price);
+        presenter.addInventoryItem(newCar.getVIN(), newCar.getMake(), newCar.getModel(), newCar.getColor(), newCar.getPrice());
+        JOptionPane.showMessageDialog(null,"A new car is successfully added in the inventory system");
     }
 
     @Override
