@@ -26,21 +26,14 @@ public class FinanceMainView extends javax.swing.JFrame implements View
     {
         this.financed_cars = viewModel.loadFinancedCars();
         this.viewModel = viewModel;
-<<<<<<< HEAD
-    }
 
-    public String render() {
-
-        StringBuilder response = new StringBuilder(financed_cars.size() + " CARS CURRENTLY BEING FINANCED:\nRESULT #\t VIN\n");
-=======
-        //initComponents();
     }
 
     public String render() {
         initComponents();
         this.setVisible(true);
         StringBuilder response = new StringBuilder(this.financed_cars.size() + " CARS CURRENTLY BEING FINANCED:\nRESULT #\t VIN\n");
->>>>>>> justinUseThis
+
 
         int counter = 1;
         for (FinanceCarModel car : financed_cars) {
@@ -75,10 +68,10 @@ public class FinanceMainView extends javax.swing.JFrame implements View
             {
                 View view = new FinanceDetailView(this.viewModel,current_car);
                 viewModel.switchView(view);
-<<<<<<< HEAD
-=======
+
+
                 found = true;
->>>>>>> justinUseThis
+
             }
         }
         if(!found) {

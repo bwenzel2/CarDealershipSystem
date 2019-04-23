@@ -39,23 +39,13 @@ public class AddFinanceView extends JFrame implements View {
         this.price = 0;
         this.amountPaid = 0;
         this.financedViewModel = view;
-<<<<<<< HEAD
-    }
-    public String render() {
-      
-        StringBuilder response = new StringBuilder("Financed Car\n");
-        response.append("Car Vin: " + this.vin +  "\nCar Make " +this.make+"\nCar Model "+this.model+"\nCar Color "+this.color+"\nCar Price "+this.price+"\nDown Payment "+this.amountPaid+ "\n");
-        initComponents();
-        this.setVisible(true);
-        return response.toString();
-=======
-        //initComponents();
+
     }
     public String render() {
         initComponents();
         this.setVisible(true);
         return "AddFinanceCar view rendered";
->>>>>>> justinUseThis
+
     }
 
     private void button1ActionPerformed(ActionEvent e) {
