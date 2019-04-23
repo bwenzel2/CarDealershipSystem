@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="intellij_forms_rt_src1">
+    <CLASSES />
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/lib/intellij_forms_rt_src.zip!/" />
+    </SOURCES>
+  </library>
+</component>

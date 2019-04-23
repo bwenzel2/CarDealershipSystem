@@ -1,0 +1,16 @@
+<component name="libraryTable">
+  <library name="lib1">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/jgoodies-forms-javadoc.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/intellij_forms_rt.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/intellij_forms_rt_src.zip!/" />
+      <root url="jar://$PROJECT_DIR$/lib/jgoodies-common.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/jgoodies-common-javadoc.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/jgoodies-common-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/jgoodies-forms-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/jgoodies-forms.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
