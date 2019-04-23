@@ -19,42 +19,42 @@ import javax.swing.event.ListSelectionListener;
 import java.util.ArrayList;
 
 public class InventoryMainView extends javax.swing.JFrame implements View {
-	
-	private Set<InventoryCarRenderable> renderItems;
-	private InventoryPresenter presenter;
-	private MainView mainView;
-	private Set<InventoryCarModel> inventoryItems;
-	String findVin;
-	public InventoryMainView(Set<InventoryCarRenderable> items, InventoryPresenter presenter, MainView mainView) {
-		this.renderItems = items;
-		this.presenter = presenter;
-		this.mainView = mainView;
-	}
+
+    private Set<InventoryCarRenderable> renderItems;
+    private InventoryPresenter presenter;
+    private MainView mainView;
+    private Set<InventoryCarModel> inventoryItems;
+    String findVin;
+    public InventoryMainView(Set<InventoryCarRenderable> items, InventoryPresenter presenter, MainView mainView) {
+        this.renderItems = items;
+        this.presenter = presenter;
+        this.mainView = mainView;
+    }
 
     public InventoryMainView(InventoryPresenter mainview, Set<InventoryCarModel> inventoryItems) {
-	    presenter = mainview;
-	    this.inventoryItems = inventoryItems;
+        presenter = mainview;
+        this.inventoryItems = inventoryItems;
     }
 
 
     public String render() {
-		initComponents();
-		this.setVisible(true);
-		StringBuilder response = new StringBuilder(renderItems.size() + " CARS IN CURRENT INVENTORY:\nRESULT #\t VIN\n");
-		
-		int counter = 1;
-		for (InventoryCarRenderable car : renderItems) {
-			response.append(counter++ + "\t\t" + car.toString() + "\n");	
-		}
-		return response.toString();
-	}
+        initComponents();
+        this.setVisible(true);
+        StringBuilder response = new StringBuilder(renderItems.size() + " CARS IN CURRENT INVENTORY:\nRESULT #\t VIN\n");
 
-	private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {                                           
-		View new_view = new MainView(inventoryItems, presenter);
-		this.presenter.switchView(new_view);
-	}
+        int counter = 1;
+        for (InventoryCarRenderable car : renderItems) {
+            response.append(counter++ + "\t\t" + car.toString() + "\n");
+        }
+        return response.toString();
+    }
 
-	private void detailedViewButtonActionPerformed(ActionEvent e) {
+    private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {
+        View new_view = new MainView(inventoryItems, presenter);
+        this.presenter.switchView(new_view);
+    }
+
+    private void detailedViewButtonActionPerformed(ActionEvent e) {
         for (InventoryCarRenderable s: renderItems) {
             if(s.getVIN().equals(findVin)) {
                 View new_view = new DetailView(presenter, s);
@@ -62,13 +62,13 @@ public class InventoryMainView extends javax.swing.JFrame implements View {
             }
 
         }
-	}
+    }
 
-	private javax.swing.JButton backButton;
-	private javax.swing.JLabel inventoryLabel;
-	private javax.swing.JList<String> inventoryList;
-	private javax.swing.JScrollPane jScrollPane1;
-	private javax.swing.JButton newItemButton;
+    private javax.swing.JButton backButton;
+    private javax.swing.JLabel inventoryLabel;
+    private javax.swing.JList<String> inventoryList;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton newItemButton;
 
 
     private void initComponents() {
@@ -108,11 +108,11 @@ public class InventoryMainView extends javax.swing.JFrame implements View {
 
         //---- button1 ----
         button1.setText("Detailed View");
-				button1.addActionListener(new java.awt.event.ActionListener() {
-					public void actionPerformed(java.awt.event.ActionEvent evt) {
-						detailedViewButtonActionPerformed(evt);
-					}
-				});
+        button1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                detailedViewButtonActionPerformed(evt);
+            }
+        });
         contentPane.add(button1, BorderLayout.CENTER);
 
         //---- button2 ----
