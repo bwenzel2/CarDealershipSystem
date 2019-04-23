@@ -360,8 +360,7 @@ class Application extends javax.swing.JFrame implements Publisher {
 
 	private void financeButtonActionPerformed(java.awt.event.ActionEvent evt) {
 		//System.out.println("GOING TO FINANCE SECTION");
-		financed_cars = fvm.loadFinancedCars();
-		FinanceMainView finance = new FinanceMainView(fvm,financed_cars);
+		FinanceMainView finance = new FinanceMainView(fvm);
 		fvm.switchView(finance);
 	}
 

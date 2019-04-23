@@ -14,7 +14,6 @@ import javax.swing.border.*;
 import com.intellij.uiDesigner.core.*;
 import com.jgoodies.forms.factories.*;
 import com.jgoodies.forms.layout.*;
-import org.jdesktop.swingx.*;
 /*
  * Created by JFormDesigner on Sun Apr 21 15:21:54 EDT 2019
  */
@@ -31,10 +30,16 @@ public class FinanceDetailView extends javax.swing.JFrame implements View {
     public FinanceDetailView(FinanceViewModel view, FinanceCarModel car) {
         this.view = view;
         this.car = car;
-        initComponents();
     }
     public String render() {
+        initComponents();
         this.setVisible(true);
+        car_vin.setText(car.getCar().getVIN());
+        car_make.setText(car.getCar().getMake());
+        car_price.setText(String.valueOf(car.getPrice()));
+        car_model.setText(car.getCar().getModel());
+        car_color.setText(car.getCar().getColor());
+        amount_paid.setText(String.valueOf(car.getAmount_paid()));
         StringBuilder response = new StringBuilder("Financed Car\n");
         CarModel tempCar = car.getCar();
         response.append("Car Vin: " + tempCar.getVIN() +  "\nCar Make " + tempCar.getMake()+"\nCar Model "+ tempCar.getModel()+"\nCar Color "+ tempCar.getColor()+"\nCar Price "
@@ -44,7 +49,7 @@ public class FinanceDetailView extends javax.swing.JFrame implements View {
 
 
     private void okButtonActionPerformed(ActionEvent e) {
-        View new_view = new FinanceMainView(this.view, this.view.getFinanced_cars());
+        View new_view = new FinanceMainView(this.view);
         this.view.switchView(new_view);
     }
 
@@ -54,17 +59,17 @@ public class FinanceDetailView extends javax.swing.JFrame implements View {
         dialogPane = new JPanel();
         contentPanel = new JPanel();
         label2 = new JLabel();
-        car_vin = new JTextArea();
+        car_vin = new JLabel();
         label3 = new JLabel();
-        car_model = new JTextArea();
+        car_model = new JLabel();
         label4 = new JLabel();
-        car_make = new JTextArea();
+        car_make = new JLabel();
         label5 = new JLabel();
-        car_color = new JTextArea();
+        car_color = new JLabel();
         label6 = new JLabel();
-        car_price = new JTextArea();
+        car_price = new JLabel();
         label7 = new JLabel();
-        amount_paid = new JTextArea();
+        amount_paid = new JLabel();
         label1 = new JLabel();
         buttonBar = new JPanel();
         okButton = new JButton();
@@ -102,12 +107,10 @@ public class FinanceDetailView extends javax.swing.JFrame implements View {
                     new Insets(0, 0, 5, 10), 0, 0));
 
                 //---- car_vin ----
-                car_vin.setBorder(new BevelBorder(BevelBorder.LOWERED));
-                car_vin.setPreferredSize(new Dimension(250, 45));
-                car_vin.setMinimumSize(new Dimension(250, 45));
+                car_vin.setMaximumSize(new Dimension(450, 41));
                 contentPanel.add(car_vin, new GridBagConstraints(1, 0, 1, 1, 0.0, 0.0,
-                    GridBagConstraints.CENTER, GridBagConstraints.NONE,
-                    new Insets(0, 0, 5, 10), 0, 0));
+                    GridBagConstraints.CENTER, GridBagConstraints.BOTH,
+                    new Insets(0, 25, 5, 10), 0, 0));
 
                 //---- label3 ----
                 label3.setText("Car Model");
@@ -115,13 +118,8 @@ public class FinanceDetailView extends javax.swing.JFrame implements View {
                 contentPanel.add(label3, new GridBagConstraints(0, 1, 1, 1, 0.0, 0.0,
                     GridBagConstraints.CENTER, GridBagConstraints.NONE,
                     new Insets(0, 0, 5, 10), 0, 0));
-
-                //---- car_model ----
-                car_model.setBorder(new BevelBorder(BevelBorder.LOWERED));
-                car_model.setPreferredSize(new Dimension(250, 45));
-                car_model.setMinimumSize(new Dimension(250, 45));
                 contentPanel.add(car_model, new GridBagConstraints(1, 1, 1, 1, 0.0, 0.0,
-                    GridBagConstraints.CENTER, GridBagConstraints.NONE,
+                    GridBagConstraints.CENTER, GridBagConstraints.BOTH,
                     new Insets(0, 0, 5, 10), 0, 0));
 
                 //---- label4 ----
@@ -130,13 +128,8 @@ public class FinanceDetailView extends javax.swing.JFrame implements View {
                 contentPanel.add(label4, new GridBagConstraints(0, 2, 1, 1, 0.0, 0.0,
                     GridBagConstraints.CENTER, GridBagConstraints.NONE,
                     new Insets(0, 0, 5, 10), 0, 0));
-
-                //---- car_make ----
-                car_make.setBorder(new BevelBorder(BevelBorder.LOWERED));
-                car_make.setPreferredSize(new Dimension(250, 45));
-                car_make.setMinimumSize(new Dimension(250, 45));
                 contentPanel.add(car_make, new GridBagConstraints(1, 2, 1, 1, 0.0, 0.0,
-                    GridBagConstraints.CENTER, GridBagConstraints.NONE,
+                    GridBagConstraints.CENTER, GridBagConstraints.BOTH,
                     new Insets(0, 0, 5, 10), 0, 0));
 
                 //---- label5 ----
@@ -145,13 +138,8 @@ public class FinanceDetailView extends javax.swing.JFrame implements View {
                 contentPanel.add(label5, new GridBagConstraints(0, 3, 1, 1, 0.0, 0.0,
                     GridBagConstraints.CENTER, GridBagConstraints.NONE,
                     new Insets(0, 0, 5, 10), 0, 0));
-
-                //---- car_color ----
-                car_color.setBorder(new BevelBorder(BevelBorder.LOWERED));
-                car_color.setPreferredSize(new Dimension(250, 45));
-                car_color.setMinimumSize(new Dimension(250, 45));
                 contentPanel.add(car_color, new GridBagConstraints(1, 3, 1, 1, 0.0, 0.0,
-                    GridBagConstraints.CENTER, GridBagConstraints.NONE,
+                    GridBagConstraints.CENTER, GridBagConstraints.BOTH,
                     new Insets(0, 0, 5, 10), 0, 0));
 
                 //---- label6 ----
@@ -160,13 +148,8 @@ public class FinanceDetailView extends javax.swing.JFrame implements View {
                 contentPanel.add(label6, new GridBagConstraints(0, 4, 1, 1, 0.0, 0.0,
                     GridBagConstraints.CENTER, GridBagConstraints.NONE,
                     new Insets(0, 0, 5, 10), 0, 0));
-
-                //---- car_price ----
-                car_price.setBorder(new BevelBorder(BevelBorder.LOWERED));
-                car_price.setPreferredSize(new Dimension(250, 45));
-                car_price.setMinimumSize(new Dimension(250, 45));
                 contentPanel.add(car_price, new GridBagConstraints(1, 4, 1, 1, 0.0, 0.0,
-                    GridBagConstraints.CENTER, GridBagConstraints.NONE,
+                    GridBagConstraints.CENTER, GridBagConstraints.BOTH,
                     new Insets(0, 0, 5, 10), 0, 0));
 
                 //---- label7 ----
@@ -175,13 +158,8 @@ public class FinanceDetailView extends javax.swing.JFrame implements View {
                 contentPanel.add(label7, new GridBagConstraints(0, 5, 1, 1, 0.0, 0.0,
                     GridBagConstraints.CENTER, GridBagConstraints.NONE,
                     new Insets(0, 0, 5, 10), 0, 0));
-
-                //---- amount_paid ----
-                amount_paid.setBorder(new BevelBorder(BevelBorder.LOWERED));
-                amount_paid.setPreferredSize(new Dimension(250, 45));
-                amount_paid.setMinimumSize(new Dimension(250, 45));
                 contentPanel.add(amount_paid, new GridBagConstraints(1, 5, 1, 1, 0.0, 0.0,
-                    GridBagConstraints.CENTER, GridBagConstraints.NONE,
+                    GridBagConstraints.CENTER, GridBagConstraints.BOTH,
                     new Insets(0, 0, 5, 10), 0, 0));
             }
             dialogPane.add(contentPanel, BorderLayout.CENTER);
@@ -220,17 +198,17 @@ public class FinanceDetailView extends javax.swing.JFrame implements View {
     private JPanel dialogPane;
     private JPanel contentPanel;
     private JLabel label2;
-    private JTextArea car_vin;
+    private JLabel car_vin;
     private JLabel label3;
-    private JTextArea car_model;
+    private JLabel car_model;
     private JLabel label4;
-    private JTextArea car_make;
+    private JLabel car_make;
     private JLabel label5;
-    private JTextArea car_color;
+    private JLabel car_color;
     private JLabel label6;
-    private JTextArea car_price;
+    private JLabel car_price;
     private JLabel label7;
-    private JTextArea amount_paid;
+    private JLabel amount_paid;
     private JLabel label1;
     private JPanel buttonBar;
     private JButton okButton;

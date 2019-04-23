@@ -5,7 +5,12 @@ import java.awt.event.ActionEvent;
 import javax.swing.*;
 import java.util.Set;
 import javax.swing.border.*;
+<<<<<<< HEAD
 import inventory.models.InventoryCarModel;
+=======
+import com.intellij.uiDesigner.core.*;
+//import com.sun.org.apache.xpath.internal.operations.String;
+>>>>>>> justinUseThis
 import inventory.presenters.InventoryPresenter;
 
 public class DetailView extends javax.swing.JFrame implements View {

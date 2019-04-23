@@ -23,7 +23,7 @@ public class FinanceViewModel
     public FinanceViewModel()
     {
         this.financed_cars = loadFinancedCars();
-        currentView = new FinanceMainView(this,financed_cars);
+        currentView = new FinanceMainView(this);
     }
 
     public Set<FinanceCarModel> getFinanced_cars() {
@@ -33,7 +33,7 @@ public class FinanceViewModel
     // switches the view to a different finance section view
     public void switchView (View view)
     {
-        this.currentView = view;
+        currentView = view;
         renderView();
     }
     
@@ -45,11 +45,17 @@ public class FinanceViewModel
             FileWriter writer = new FileWriter(data_location,true);
             BufferedWriter bwr = new BufferedWriter(writer);
             bwr.write(car.getVIN());
+            bwr.write(",");
             bwr.write(car.getMake());
+            bwr.write(",");
             bwr.write(car.getModel());
+            bwr.write(",");
             bwr.write(car.getColor());
-            bwr.write(price);
-            bwr.write(amount_paid);
+            bwr.write(",");
+            bwr.write(String.valueOf(price));
+            bwr.write(",");
+            bwr.write(String.valueOf(amount_paid));
+            bwr.write("\n");
             bwr.close();
             writer.close();
             this.financed_cars.add(new_car);
@@ -77,14 +83,18 @@ public class FinanceViewModel
         Set<FinanceCarModel> cars = new HashSet<FinanceCarModel>();
         try(BufferedReader br = new BufferedReader(new FileReader(this.data_location))) {
             String line;
-            while ((line = br.readLine()) != null)
+            int counter = 0;
+            while ((line = br.readLine()) != null && line != "\n")
             {
                 String[] values = line.split(",");
-                if (values[0].equals("vin")){continue;}
+                if (values[0].equals("vin")){
+                    continue;
+                }
                 else{
                     CarModel temp_car = new CarModel(values[0],values[1],values[2],values[3]);
                     FinanceCarModel temp_finance = new FinanceCarModel(temp_car,Integer.parseInt(values[4]),Integer.parseInt(values[5]));
-                    this.financed_cars.add(temp_finance);
+                    System.out.println(temp_finance.toString());
+                    cars.add(temp_finance);
                 }
             }
 		} catch (Exception e) {
