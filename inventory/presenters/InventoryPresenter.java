@@ -21,25 +21,25 @@ public class InventoryPresenter implements Publisher
 	//the mailing list message broker
 	private MessageBroker broker;
 	String data_location = "CarDatabase.csv";
-	
+
 	//the currently-selected view, defaults to the main view
 	private View currentView;
-	
+
 	//the list of all cars currently in inventory
 	Set<InventoryCarModel> inventoryItems;
-	
-	
+
+
 	public InventoryPresenter(MessageBroker broker) {
 		this.broker = broker;
 		inventoryItems = loadInventoryItems();
-		
+
 		Set<InventoryCarRenderable> renderItems = new HashSet<InventoryCarRenderable>();
 		for (InventoryCarModel car : inventoryItems) {
 			renderItems.add(new InventoryCarRenderable(car.getVIN(), car.getMake(), car.getModel(), car.getColor(), car.getPrice()));
 		}
 		currentView = new MainView(inventoryItems, this);
 	}
-	
+
 	public Set<InventoryCarModel> getInventoryItems() {
 		return inventoryItems;
 	}
@@ -49,20 +49,20 @@ public class InventoryPresenter implements Publisher
 		this.currentView = view;
 		renderView();
 	}
-	
-	
+
+
 	//publishes a message to the mailing list by pushing it to the message broker
 	public void publish(MessageBroker broker, Message message) {
 		broker.sendMessage(message);
 	}
-	
-	
+
+
 	//tells the currently-selected view to render
 	private void renderView() {
 		System.out.println(currentView.render());
 	}
-	
-	
+
+
 	//loads inventory from a source
 	//TODO: add the ability to load from a file or something
 	public Set<InventoryCarModel> loadInventoryItems() {
@@ -74,8 +74,8 @@ public class InventoryPresenter implements Publisher
 		}
 		return items;
 	}
-	
-	
+
+
 	public void addInventoryItem(String VIN, String make, String model, String color, int price) {
 		try{
 			CarModel addInventory = new CarModel(VIN, make, model, color);
@@ -95,8 +95,8 @@ public class InventoryPresenter implements Publisher
 			System.out.println("Sorry, but something was corupted with the information givin to addFinancedCar");
 		}
 	}
-	
-	
+
+
 	public void updateInventoryItem(InventoryCarModel update_car) {
 		for (InventoryCarModel s : inventoryItems) {
 			if (s.getVIN().equals(update_car.getVIN())) {
@@ -105,8 +105,8 @@ public class InventoryPresenter implements Publisher
 			}
 		}
 	}
-	
-	
+
+
 	public void deleteInventoryItem(InventoryCarModel removeCar) {
 		try{
 			this.inventoryItems.remove(removeCar);

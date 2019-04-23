@@ -4,6 +4,7 @@ import finance.models.FinanceCarModel;
 import inventory.models.InventoryCarModel;
 import inventory.presenters.*;
 import inventory.views.InventoryMainView;
+import inventory.views.MainView;
 import mailing.brokers.MessageBroker;
 
 import mailing.messages.Message;
@@ -353,14 +354,15 @@ class Application extends javax.swing.JFrame implements Publisher {
 	private void inventoryButtonActionPerformed(java.awt.event.ActionEvent evt) {
 		//open the inventory
 		inventoryCarModels = Ip.loadInventoryItems();
-		InventoryMainView inventoryMainView = new InventoryMainView(Ip, inventoryCarModels);
-		Ip.switchView(inventoryMainView);
+		MainView mainView = new MainView(inventoryCarModels, Ip);
+		Ip.switchView(mainView);
 
 	}
 
 	private void financeButtonActionPerformed(java.awt.event.ActionEvent evt) {
 		//System.out.println("GOING TO FINANCE SECTION");
-		FinanceMainView finance = new FinanceMainView(fvm);
+		financed_cars = fvm.loadFinancedCars();
+		FinanceMainView finance = new FinanceMainView(fvm,financed_cars);
 		fvm.switchView(finance);
 	}
 
