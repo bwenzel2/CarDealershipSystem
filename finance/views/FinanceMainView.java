@@ -16,24 +16,23 @@ import java.awt.*;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-import org.jdesktop.swingx.*;
 
 public class FinanceMainView extends javax.swing.JFrame implements View
 {
     private Set<FinanceCarModel> financed_cars;
     private FinanceViewModel viewModel;
 
-    public FinanceMainView(FinanceViewModel viewModel,Set<FinanceCarModel> financed_cars)
+    public FinanceMainView(FinanceViewModel viewModel)
     {
-        this.financed_cars = financed_cars;
+        this.financed_cars = viewModel.loadFinancedCars();
         this.viewModel = viewModel;
-        initComponents();
+        //initComponents();
     }
 
     public String render() {
-
+        initComponents();
         this.setVisible(true);
-        StringBuilder response = new StringBuilder(financed_cars.size() + " CARS CURRENTLY BEING FINANCED:\nRESULT #\t VIN\n");
+        StringBuilder response = new StringBuilder(this.financed_cars.size() + " CARS CURRENTLY BEING FINANCED:\nRESULT #\t VIN\n");
 
         int counter = 1;
         for (FinanceCarModel car : financed_cars) {
@@ -47,19 +46,24 @@ public class FinanceMainView extends javax.swing.JFrame implements View
     }
 
     private void new_financeActionPerformed(ActionEvent e) {
-        View new_view = new AddFinanceView(viewModel);
+        AddFinanceView new_view = new AddFinanceView(viewModel);
         this.viewModel.switchView(new_view);
     }
     // itterates throuh the list of financed cars to find the correct vin
     // if is does not find it a popup will let the user know
     private void detailed_viewActionPerformed(ActionEvent e) {
+        this.financed_cars = viewModel.loadFinancedCars();
         String enterd_vin = vin.getText();
+        System.out.println(financed_cars.toString());
         for(FinanceCarModel current_car: this.financed_cars)
         {
             CarModel temp_car = current_car.getCar();
+            System.out.println(temp_car.getVIN());
+            System.out.println(enterd_vin);
             if(enterd_vin.equals(temp_car.getVIN()))
             {
                 View view = new FinanceDetailView(this.viewModel,current_car);
+                viewModel.switchView(view);
             }
         }
         JOptionPane.showMessageDialog(null,"Car could not be found");
