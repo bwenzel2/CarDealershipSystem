@@ -78,8 +78,8 @@ public class InventoryPresenter implements Publisher
 
 	public void addInventoryItem(String VIN, String make, String model, String color, int price) {
 		try{
-			CarModel addInventory = new CarModel(VIN, make, model, color);
 			InventoryCarModel inventoryCarModel = new InventoryCarModel(VIN, make, model, color, price);
+			inventoryItems.add(inventoryCarModel);
 			FileWriter writer = new FileWriter(data_location,true);
 			BufferedWriter bufferedWriter = new BufferedWriter(writer);
 			bufferedWriter.write(VIN);
@@ -88,7 +88,6 @@ public class InventoryPresenter implements Publisher
 			bufferedWriter.write(color);
 			bufferedWriter.close();
 			writer.close();
-			inventoryItems.add(inventoryCarModel);
 		}
 		catch (Exception e)
 		{
