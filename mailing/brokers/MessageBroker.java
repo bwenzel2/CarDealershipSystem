@@ -24,7 +24,6 @@ public class MessageBroker {
 		
 		//if the topic doesn't exist, create it and add the new subscriber
 		if (!topics.containsKey(topic)) {
-			System.out.println("Topic '" + topic + "' doesn't already exist, creating it.");
 			Set<Subscriber> subscribers = new HashSet<Subscriber>();
 			subscribers.add(account);
 			this.topics.put(topic, subscribers);
@@ -45,13 +44,20 @@ public class MessageBroker {
 				topics.get(topic).remove(account);
 				System.out.println("Removed subscriber '" + account + "' from topic '" + topic + "'");
 			}
+			else {
+				System.out.println("'" + account + "' is not subscribed to topic [" + topic + "] and so cannot be unsubscribed");
+			}
 			
+		}
+		else {
+			System.out.println("'" + account + "' is not subscribed to topic [" + topic + "] and so cannot be unsubscribed");
 		}
 	}
 	
 	
 	//broadcasts a message to every subscriber who is subscribed to that message's topic
 	public void sendMessage(Message message) {
+		System.out.println("Sent message '" + message.getContent() + "' to topic [" + message.getTopic() + "]");
 		if (topics.containsKey(message.getTopic())) {
 			for (Subscriber e : topics.get(message.getTopic())) {
 				e.receive(message);
