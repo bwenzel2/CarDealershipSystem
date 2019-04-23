@@ -221,7 +221,7 @@ public class AddInventoryView extends JFrame implements View {
             System.out.println("Error in adding a new vehicle to the inventory");
         }
         InventoryCarModel newCar = new InventoryCarModel(vin, make, model, color, price);
-        presenter.addInventoryItem(newCar.getVIN(), newCar.getMake(), newCar.getModel(), newCar.getColor(), newCar.getPrice());
+        this.presenter.addInventoryItem(newCar.getVIN(), newCar.getMake(), newCar.getModel(), newCar.getColor(), newCar.getPrice());
         JOptionPane.showMessageDialog(null,"A new car is successfully added in the inventory system");
     }
 
