@@ -55,6 +55,7 @@ public class FinanceMainView extends javax.swing.JFrame implements View
         this.financed_cars = viewModel.loadFinancedCars();
         String enterd_vin = vin.getText();
         System.out.println(financed_cars.toString());
+        boolean found = false;
         for(FinanceCarModel current_car: this.financed_cars)
         {
             CarModel temp_car = current_car.getCar();
@@ -64,9 +65,12 @@ public class FinanceMainView extends javax.swing.JFrame implements View
             {
                 View view = new FinanceDetailView(this.viewModel,current_car);
                 viewModel.switchView(view);
+                found = true;
             }
         }
-        JOptionPane.showMessageDialog(null,"Car could not be found");
+        if(!found) {
+            JOptionPane.showMessageDialog(null, "Car could not be found");
+        }
 
     }
 
