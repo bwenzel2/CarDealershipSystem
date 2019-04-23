@@ -10,7 +10,6 @@ public class InventoryCarModel extends CarModel {
 		if (price < 0) {
 			throw new IllegalArgumentException("Sorry, price must be a positive number!");
 		}
-		
 		this.price = price;
 	}
 	
